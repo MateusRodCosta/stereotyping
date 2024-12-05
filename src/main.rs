@@ -21,12 +21,10 @@ fn main() -> glib::ExitCode {
 fn build_intial_screen(app: &Application) {
     let header_bar = HeaderBar::builder().build();
 
-    let button = Button::builder().label("Choose File...").build();
-    button.add_css_class("suggested-action");
-    button.add_css_class("pill");
-    button.set_vexpand(false);
-    button.set_hexpand(false);
-    button.set_can_shrink(true);
+    let button = Button::builder()
+        .label("Choose File...")
+        .css_classes(["pill", "suggested-action"])
+        .build();
 
     let content = Box::builder()
         .margin_top(32)
@@ -34,6 +32,7 @@ fn build_intial_screen(app: &Application) {
         .margin_start(32)
         .margin_end(32)
         .orientation(Orientation::Vertical)
+        .halign(Align::Center)
         .valign(Align::Center)
         .build();
     content.set_spacing(16);
