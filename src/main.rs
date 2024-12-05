@@ -102,8 +102,7 @@ fn fetch_file_data(file: gio::File, window: &ApplicationWindow, toolbar_view: &T
 
 fn build_details_screen(stereotype: &FileStereotype) -> ScrolledWindow {
     let list_items = stereotype_to_rows(stereotype);
-    let listbox = ListBox::builder().build();
-    listbox.add_css_class("boxed-list");
+    let listbox = ListBox::builder().css_classes(["boxed-list"]).build();
     for item in list_items.iter() {
         listbox.append(item);
     }
@@ -114,6 +113,7 @@ fn build_details_screen(stereotype: &FileStereotype) -> ScrolledWindow {
         .margin_start(32)
         .margin_end(32)
         .orientation(Orientation::Vertical)
+        .halign(Align::Center)
         .valign(Align::Center)
         .build();
     content.set_spacing(16);
@@ -129,32 +129,32 @@ fn stereotype_to_rows(stereotype: &FileStereotype) -> [ActionRow; 5] {
     let item_filename = ActionRow::builder()
         .title("Filename")
         .subtitle(stereotype.get_filename())
+        .css_classes(["property"])
         .build();
-    item_filename.add_css_class("property");
 
     let item_description = ActionRow::builder()
         .title("Description")
         .subtitle(stereotype.get_description())
+        .css_classes(["property"])
         .build();
-    item_description.add_css_class("property");
 
     let item_mime_type = ActionRow::builder()
         .title("MIME Type")
         .subtitle(stereotype.get_mime_type())
+        .css_classes(["property"])
         .build();
-    item_mime_type.add_css_class("property");
 
     let item_mime_encoding = ActionRow::builder()
         .title("MIME Encoding")
         .subtitle(stereotype.get_mime_encoding())
+        .css_classes(["property"])
         .build();
-    item_mime_encoding.add_css_class("property");
 
     let item_extension = ActionRow::builder()
         .title("Extension")
         .subtitle(stereotype.get_entension())
+        .css_classes(["property"])
         .build();
-    item_extension.add_css_class("property");
 
     [
         item_filename,
