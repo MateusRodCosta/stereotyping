@@ -1,4 +1,5 @@
 use super::file_stereotype::FileStereotype;
+use gio::{prelude::*, Cancellable};
 
 pub fn stereotype_file(filepath: &str) -> Option<FileStereotype> {
     let result = extract_stereotype(filepath);
@@ -11,28 +12,33 @@ pub fn stereotype_file(filepath: &str) -> Option<FileStereotype> {
     };
 }
 
-fn extract_stereotype(filename: &str) -> Result<FileStereotype, Box<dyn std::error::Error>> {
-    let cookie = magic::Cookie::open(magic::cookie::Flags::ERROR)?;
+fn extract_stereotype(filepath: &str) -> Result<FileStereotype, Box<dyn std::error::Error>> {
+    let file = gio::File::for_parse_name(filepath);
+    let attrs = format!(
+        "{},{}",
+        gio::FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+        gio::FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
+    );
+    let file_info = file.query_info(
+        attrs.as_str(),
+        gio::FileQueryInfoFlags::NONE,
+        Cancellable::NONE,
+    )?;
 
-    let database = Default::default();
-    let cookie = cookie.load(&database)?;
-
-    let summary = cookie.file(filename)?;
-
-    cookie.set_flags(magic::cookie::Flags::ERROR | magic::cookie::Flags::MIME_TYPE)?;
-    let mime_type = cookie.file(filename)?;
-    cookie.set_flags(magic::cookie::Flags::ERROR | magic::cookie::Flags::MIME_ENCODING)?;
-    let mime_encoding = cookie.file(filename)?;
-
-    cookie.set_flags(magic::cookie::Flags::ERROR | magic::cookie::Flags::EXTENSION)?;
-    let extension = cookie.file(filename)?;
+    let filename = file_info.display_name();
+    let Some(content_type) = file_info.content_type() else {
+        return Err("Invalid content type".into());
+    };
+    let description = gio::functions::content_type_get_description(&content_type);
+    let Some(mime_type) = gio::functions::content_type_get_mime_type(&content_type) else {
+        return Err("Invalid mime type".into());
+    };
 
     let file_stereotype = FileStereotype::new(
-        String::from(filename),
-        summary,
-        mime_type,
-        mime_encoding,
-        extension,
+        filename.to_string(),
+        filepath.to_string(),
+        description.to_string(),
+        mime_type.to_string(),
     );
 
     Ok(file_stereotype)

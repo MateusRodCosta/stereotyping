@@ -6,6 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-magic = "0.16.2"
 gtk = { version = "0.9.3", package = "gtk4", features = ["v4_16", "gnome_47"] }
 adw = { version = "0.7.1", package = "libadwaita", features = ["v1_6"] }
+gio = { version = "0.20.5", features = ["v2_82"] }
