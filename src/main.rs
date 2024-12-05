@@ -27,15 +27,15 @@ fn build_intial_screen(app: &Application) {
         .build();
 
     let content = Box::builder()
-        .margin_top(32)
-        .margin_bottom(32)
-        .margin_start(32)
-        .margin_end(32)
+        .margin_top(24)
+        .margin_bottom(24)
+        .margin_start(12)
+        .margin_end(12)
         .orientation(Orientation::Vertical)
         .halign(Align::Center)
         .valign(Align::Center)
         .build();
-    content.set_spacing(16);
+    content.set_spacing(24);
     content.append(&button);
 
     let toolbar_view = ToolbarView::builder().content(&content).build();
@@ -108,15 +108,15 @@ fn build_details_screen(stereotype: &FileStereotype) -> ScrolledWindow {
     }
 
     let content = Box::builder()
-        .margin_top(32)
-        .margin_bottom(32)
-        .margin_start(32)
-        .margin_end(32)
+        .margin_top(24)
+        .margin_bottom(24)
+        .margin_start(12)
+        .margin_end(12)
         .orientation(Orientation::Vertical)
         .halign(Align::Center)
         .valign(Align::Center)
         .build();
-    content.set_spacing(16);
+    content.set_spacing(24);
     content.append(&listbox);
 
     let clamp = Clamp::builder().child(&content).build();
