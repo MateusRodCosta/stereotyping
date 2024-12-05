@@ -102,7 +102,10 @@ fn fetch_file_data(file: gio::File, window: &ApplicationWindow, toolbar_view: &T
 
 fn build_details_screen(stereotype: &FileStereotype) -> ScrolledWindow {
     let list_items = stereotype_to_rows(stereotype);
-    let listbox = ListBox::builder().css_classes(["boxed-list"]).build();
+    let listbox = ListBox::builder()
+        .selection_mode(gtk::SelectionMode::None)
+        .css_classes(["boxed-list"])
+        .build();
     for item in list_items.iter() {
         listbox.append(item);
     }
