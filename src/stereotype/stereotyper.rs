@@ -1,14 +1,13 @@
 use super::file_stereotype::FileStereotype;
 
 pub fn stereotype_file(filepath: &str) -> Option<FileStereotype> {
-    let result = extract_stereotype(filepath);
-    match result {
-        Ok(stereotype) => return Some(stereotype),
+    match extract_stereotype(filepath) {
+        Ok(stereotype) => Some(stereotype),
         Err(err) => {
-            println!("{}", err.to_string());
-            return None;
+            eprintln!("{}", err.to_string());
+            None
         }
-    };
+    }
 }
 
 fn extract_stereotype(filename: &str) -> Result<FileStereotype, Box<dyn std::error::Error>> {
