@@ -2,13 +2,13 @@ mod config;
 mod stereotype;
 
 use adw::{ActionRow, Application, ApplicationWindow, Clamp, HeaderBar, ToolbarView};
-use glib::clone;
-use gtk::{prelude::*, gio, glib};
-use gtk::{Box, Button, ListBox, ScrolledWindow};
-use gtk::{Orientation, Align};
-use gtk::FileDialog;
-use stereotype::{stereotyper::stereotype_file, file_stereotype::FileStereotype};
 use config::APP_ID;
+use glib::clone;
+use gtk::FileDialog;
+use gtk::{gio, glib, prelude::*};
+use gtk::{Align, Orientation};
+use gtk::{Box, Button, ListBox, ScrolledWindow};
+use stereotype::{file_stereotype::FileStereotype, stereotyper::stereotype_file};
 
 fn main() -> glib::ExitCode {
     let app = Application::builder().application_id(APP_ID).build();
@@ -52,15 +52,29 @@ fn build_intial_screen(app: &Application) {
         window.add_css_class("devel");
     }
 
-    button.connect_clicked(clone!(@weak window, @weak toolbar_view => move |_| {
-        let file_dialog = FileDialog::new();
-        file_dialog.open(Some(&window), None::<&gio::Cancellable>, clone!(@weak window => move |r| {
-            match r {
-                Ok(file) => fetch_file_data(file, &window, &toolbar_view),
-                _ => (),
-            }
-        }));
-    }));
+    button.connect_clicked(clone!(
+        #[weak]
+        window,
+        #[weak]
+        toolbar_view,
+        move |_| {
+            let file_dialog = FileDialog::new();
+            file_dialog.open(
+                Some(&window),
+                None::<&gio::Cancellable>,
+                clone!(
+                    #[weak]
+                    window,
+                    move |r| {
+                        match r {
+                            Ok(file) => fetch_file_data(file, &window, &toolbar_view),
+                            _ => (),
+                        }
+                    }
+                ),
+            );
+        }
+    ));
 
     window.present();
 }
