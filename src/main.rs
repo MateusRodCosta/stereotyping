@@ -3,9 +3,8 @@ mod stereotype;
 
 use adw::{ActionRow, Application, ApplicationWindow, Clamp, HeaderBar, ToolbarView};
 use glib::clone;
-use gtk::prelude::*;
-use gtk::{gio, glib};
-use gtk::{Box, Button, Label, ListBox};
+use gtk::{prelude::*, gio, glib};
+use gtk::{Box, Button, ListBox, ScrolledWindow};
 use gtk::{Orientation, Align};
 use gtk::FileDialog;
 use stereotype::{stereotyper::stereotype_file, file_stereotype::FileStereotype};
