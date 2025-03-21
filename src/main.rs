@@ -80,18 +80,9 @@ fn build_intial_screen(app: &Application) {
 }
 
 fn fetch_file_data(file: gio::File, window: &ApplicationWindow, toolbar_view: &ToolbarView) {
-    let path = match file.path() {
-        Some(p) => match p.into_os_string().into_string() {
-            Ok(r) => Some(r),
-            _ => None,
-        },
-        _ => None,
-    };
+    let path = file.path().and_then(|p| p.into_os_string().into_string().ok());
 
-    let stereotype = match path {
-        Some(p) => stereotype_file(&p),
-        _ => None,
-    };
+    let stereotype = path.and_then(|p| stereotype_file(&p));
 
     match stereotype {
         Some(s) => {
@@ -99,8 +90,8 @@ fn fetch_file_data(file: gio::File, window: &ApplicationWindow, toolbar_view: &T
             let filename = &s.get_filename();
             window.set_title(Some(&format!("Stereotype - {}", filename)));
             toolbar_view.set_content(Some(&content));
-        }
-        _ => (),
+        },
+        _ => {},
     };
 }
 
