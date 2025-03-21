@@ -128,16 +128,10 @@ fn build_details_screen(stereotype: &FileStereotype) -> ScrolledWindow {
     scrolled_window
 }
 
-fn stereotype_to_rows(stereotype: &FileStereotype) -> [ActionRow; 4] {
+fn stereotype_to_rows(stereotype: &FileStereotype) -> [ActionRow; 5] {
     let item_filename = ActionRow::builder()
-        .title("File name")
+        .title("Filename")
         .subtitle(stereotype.get_filename())
-        .css_classes(["property"])
-        .build();
-
-    let item_filepath = ActionRow::builder()
-        .title("File path")
-        .subtitle(stereotype.get_filepath())
         .css_classes(["property"])
         .build();
 
@@ -153,10 +147,23 @@ fn stereotype_to_rows(stereotype: &FileStereotype) -> [ActionRow; 4] {
         .css_classes(["property"])
         .build();
 
+    let item_mime_encoding = ActionRow::builder()
+        .title("MIME Encoding")
+        .subtitle(stereotype.get_mime_encoding())
+        .css_classes(["property"])
+        .build();
+
+    let item_extension = ActionRow::builder()
+        .title("Extension")
+        .subtitle(stereotype.get_entension())
+        .css_classes(["property"])
+        .build();
+
     [
         item_filename,
-        item_filepath,
         item_description,
         item_mime_type,
+        item_mime_encoding,
+        item_extension,
     ]
 }
