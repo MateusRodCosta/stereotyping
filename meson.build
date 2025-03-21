@@ -1,4 +1,4 @@
-project('stereotyping', 'rust',
+project('stereotype', 'rust',
           version: '0.5.1',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
@@ -6,7 +6,7 @@ project('stereotyping', 'rust',
 
 gnome = import('gnome')
 
-base_id = 'dev.mateusrodcosta.Stereotyping'
+base_id = 'dev.mateusrodcosta.Stereotype'
 
 app_id = base_id
 if get_option('buildtype') != 'release'

@@ -1,12 +1,12 @@
 {
-    "id" : "dev.mateusrodcosta.Stereotyping.Devel",
+    "id" : "dev.mateusrodcosta.Stereotype.Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command" : "stereotyping",
+    "command" : "stereotype",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -22,7 +22,7 @@
         ],
         "env" : {
             "RUST_BACKTRACE" : "1",
-            "RUST_LOG" : "stereotyping=debug"
+            "RUST_LOG" : "stereotype=debug"
         }
     },
     "cleanup" : [
@@ -38,7 +38,7 @@
     ],
     "modules" : [
         {
-            "name" : "stereotyping",
+            "name" : "stereotype",
             "builddir" : true,
             "buildsystem" : "meson",
             "run-tests" : true,

@@ -1,4 +1,4 @@
-# Stereotyping
+# Stereotype
 
 A GTK4 front-end to libmagic.
 

@@ -3,14 +3,14 @@
   <id>@app-id@</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>AGPL-3.0-or-later</project_license>
-  <name>Stereotyping</name>
+  <name>Stereotype</name>
   <summary>Figure out file types</summary>
   <developer id="dev.mateusrodcosta">
     <name translate="no">Mateus Rodrigues Costa</name>
   </developer>
   <description>
-    <p>Not quite sure what kind of file you’ve stumbled upon? Stereotyping to the rescue! This utility lets you know exactly what type of data a given file contains.</p>
-    <p>Stereotyping is built on top of Libmagic, an ubiquitous and battle-tested file type library with multiple decades of development behind it.</p>
+    <p>Not quite sure what kind of file you’ve stumbled upon? Stereotype to the rescue! This utility lets you know exactly what type of data a given file contains.</p>
+    <p>Stereotype is built on top of Libmagic, an ubiquitous and battle-tested file type library with multiple decades of development behind it.</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -51,5 +51,3 @@
     <!-- </release> -->
   </releases>
 </component>
-
-

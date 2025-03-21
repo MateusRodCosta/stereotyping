@@ -44,7 +44,7 @@ fn build_intial_screen(app: &Application) {
 
     let window = ApplicationWindow::builder()
         .application(app)
-        .title("Stereotyping")
+        .title("Stereotype")
         .content(&toolbar_view)
         .build();
     window.set_default_size(640, 480);
@@ -84,7 +84,7 @@ fn fetch_file_data(file: gio::File, window: &ApplicationWindow, toolbar_view: &T
         Some(s) => {
             let content = build_details_screen(&s);
             let filename = &s.get_filename();
-            window.set_title(Some(&format!("Stereotyping - {}", filename)));
+            window.set_title(Some(&format!("Stereotype - {}", filename)));
             toolbar_view.set_content(Some(&content));
         }
         _ => (),
