@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Stereotyping
+Comment=Figure out file types
+Exec=stereotyping
+Icon=@icon@
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=file;file type;file format;libmagic;
+StartupNotify=true

@@ -1,1 +1,11 @@
 /target
+.vscode/
+target/
+build/
+_build/
+builddir/
+build-dir/
+src/config.rs
+.flatpak/
+.flatpak-builder
+.cargo
